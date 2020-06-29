@@ -16,8 +16,11 @@ ARG TETHYS_APPS_ROOT
 ###########
 # INSTALL #
 ###########
+#RUN mkdir -p /usr/lib/tethys/apps/tethys_caves
+#RUN mkdir -p ${TETHYS_PERSIST}
 COPY --chown=www:www tethysapp ${TETHYS_APPS_ROOT}/dam_inventory/tethysapp
 COPY --chown=www:www *.py ${TETHYS_APPS_ROOT}/dam_inventory/
+#COPY *.sh ${TETHYS_APPS_ROOT}/dam_inventory/
 COPY install.yml ${TETHYS_APPS_ROOT}/dam_inventory/
 
 
