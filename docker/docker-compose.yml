@@ -1,0 +1,39 @@
+version: "3.2"
+services:
+  tethys:
+    container_name: dams-docker
+    build:
+      context: ../
+      args:
+        TETHYS_HOME: "/usr/lib/tethys"
+        TETHYS_APPS_ROOT: "/usr/lib/tethys/apps"
+    ports:
+      - "80:80"
+    environment:
+      TETHYS_HOME: "/usr/lib/tethys"
+      TETHYS_PERSIST: "/var/lib/tethys_persist"
+      TETHYS_APPS_ROOT: "/usr/lib/tethys/apps"
+      TETHYS_DB_NAME: "tethys_platform"
+      TETHYS_DB_USERNAME: "tethys_default"
+      TETHYS_DB_PASSWORD: "pass"
+      POSTGRES_PASSWORD: "pass"
+      TETHYS_DB_SUPERUSER: "tethys_super"
+      TETHYS_DB_SUPERUSER_PASS: "pass"
+      TETHYS_DB_HOST: "db"
+      TETHYS_DB_PORT: "5432"
+      DEBUG: "True"
+      ASGI_PROCESSES: 4
+      CLIENT_MAX_BODY_SIZE: "75M"
+ 
+      
+      
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: postgis/postgis
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "pass"
