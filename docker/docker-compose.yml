@@ -4,9 +4,6 @@ services:
     container_name: dams-docker
     build:
       context: ../
-      args:
-        TETHYS_HOME: "/usr/lib/tethys"
-        TETHYS_APPS_ROOT: "/usr/lib/tethys/apps"
     ports:
       - "80:80"
     environment:

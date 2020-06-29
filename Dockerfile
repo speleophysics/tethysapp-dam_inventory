@@ -5,8 +5,6 @@ FROM tethysplatform/tethys-core:master
 # DEFAULT ENVIRONMENT VARIABLES
 ###############################
 
-ARG TETHYS_HOME
-ARG TETHYS_APPS_ROOT
 
 #########
 # SETUP #
@@ -16,6 +14,9 @@ ARG TETHYS_APPS_ROOT
 ###########
 # INSTALL #
 ###########
+
+### Note: These environment variables don't work. App ends up in root.
+
 COPY --chown=www:www tethysapp ${TETHYS_APPS_ROOT}/dam_inventory/tethysapp
 COPY --chown=www:www *.py ${TETHYS_APPS_ROOT}/dam_inventory/
 COPY install.yml ${TETHYS_APPS_ROOT}/dam_inventory/
