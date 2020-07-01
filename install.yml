@@ -8,8 +8,9 @@ requirements:
   skip: false
   conda:
     channels:
+      - conda-forge
     packages:
-
+      - shapely
   pip:
 
 post:

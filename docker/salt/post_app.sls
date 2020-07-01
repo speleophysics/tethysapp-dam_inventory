@@ -3,6 +3,7 @@
 {% set CONDA_HOME = salt['environ.get']('CONDA_HOME') %}
 {% set TETHYS_PERSIST = salt['environ.get']('TETHYS_PERSIST') %}
 
+
 Persist_Portal_Config_Post_App:
   file.rename:
     - source: {{ TETHYS_HOME }}/portal_config.yml
@@ -65,3 +66,5 @@ Link_ASGI_Supervisor_Post_App:
     - name: /etc/supervisor/conf.d/asgi_supervisord.conf
     - target: {{ TETHYS_PERSIST }}/asgi_supervisord.conf
     - force: True
+
+    

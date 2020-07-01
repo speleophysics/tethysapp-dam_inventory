@@ -166,7 +166,7 @@ Modify_Tethys_Site_TethysCore:
 Create_Persistent_Store:
   cmd.run:
     - name:  >
-        . {{ CONDA_HOME }}/bin/activate {{ CONDA_ENV_NAME }} && {{ TETHYS_BIN_DIR }}/tethys services create persistent -n primary_db -c {{ TETHYS_DB_USERNAME }}:{{ TETHYS_DB_PASSWORD }}@{{ TETHYS_DB_HOST }}:{{ TETHYS_DB_PORT }}
+        . {{ CONDA_HOME }}/bin/activate {{ CONDA_ENV_NAME }} && {{ TETHYS_BIN_DIR }}/tethys services create persistent -n primary_db -c {{ TETHYS_DB_SUPERUSER }}:{{ TETHYS_DB_SUPERUSER_PASS }}@{{ TETHYS_DB_HOST }}:{{ TETHYS_DB_PORT }}
     - unless: /bin/bash -c "[ -f "{{ TETHYS_PERSIST }}/setup_complete" ];"
 
 Link_Persistent_Store:
@@ -175,11 +175,13 @@ Link_Persistent_Store:
         . {{ CONDA_HOME }}/bin/activate {{ CONDA_ENV_NAME }} && {{ TETHYS_BIN_DIR }}/tethys link persistent:primary_db dam_inventory:ps_database:primary_db
     - unless: /bin/bash -c "[ -f "{{ TETHYS_PERSIST }}/setup_complete" ];"
 
+
 Syncstores:
   cmd.run:
     - name:  >
         . {{ CONDA_HOME }}/bin/activate {{ CONDA_ENV_NAME }} && {{ TETHYS_BIN_DIR }}/tethys syncstores all
     - unless: /bin/bash -c "[ -f "{{ TETHYS_PERSIST }}/setup_complete" ];"
+
 
 Flag_Complete_Setup_TethysCore:
   cmd.run:

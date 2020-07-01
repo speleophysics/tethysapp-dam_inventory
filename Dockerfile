@@ -1,5 +1,5 @@
 # Use our Tethyscore base docker image as a parent image
-FROM tethysplatform/tethys-core:master
+FROM tethysplatform/tethys-core:latest
 
 ###############################
 # DEFAULT ENVIRONMENT VARIABLES
@@ -15,11 +15,17 @@ FROM tethysplatform/tethys-core:master
 # INSTALL #
 ###########
 
+## First install dependencies. This saves build time later on update of
+## app, as dependencies are already in cache.
+COPY install.yml ${TETHYS_APPS_ROOT}/dam_inventory/
+#RUN /bin/bash -c ". cd ${TETHYS_APPS_ROOT}/dam_inventory \
+#  ; conda env update --name tethys --file install.yml"
+
 ### Note: These environment variables don't work. App ends up in root.
 
 COPY --chown=www:www tethysapp ${TETHYS_APPS_ROOT}/dam_inventory/tethysapp
 COPY --chown=www:www *.py ${TETHYS_APPS_ROOT}/dam_inventory/
-COPY install.yml ${TETHYS_APPS_ROOT}/dam_inventory/
+
 
 
 RUN /bin/bash -c ". ${CONDA_HOME}/bin/activate tethys \
